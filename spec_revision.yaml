@@ -11,7 +11,7 @@ tags:
   - name: a-tag
     description: A tag
 paths:
-  /api/config{?providerType}:
+  /api/config:
     put:
       tags:
         - a-tag
