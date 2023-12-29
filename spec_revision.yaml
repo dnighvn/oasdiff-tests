@@ -1,0 +1,78 @@
+openapi: 3.0.3
+info:
+  title: something REST API
+  description: ' something REST API documentation.'
+  contact:
+    name: something team
+    url: https://something.ai
+    email: info@something.ai
+  version: 1.0.0-SNAPSHOT
+tags:
+  - name: a-tag
+    description: A tag
+paths:
+  /api/config{?providerType}:
+    put:
+      tags:
+        - a-tag
+      summary: Update config
+      description: 'Update config for a given provider type [...]'
+      operationId: updateConfigUsingPUT
+      parameters:
+        - name: providerType
+          in: query
+          description: providerType
+          required: true
+          style: form
+          schema:
+            type: string
+            enum:
+              - EMAIL
+              - SMS
+              - BACKUP_CODE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigUpdateRequest'
+      responses:
+        default:
+          description: Default response
+    delete:
+      tags:
+        - a-tag
+      summary: Delete config
+      description: Delete config for a given provider type [...]
+      operationId: deleteConfigUsingDELETE
+      parameters:
+        - name: providerType
+          in: query
+          description: providerType
+          required: true
+          style: form
+          schema:
+            type: string
+            enum:
+              - EMAIL
+              - SMS
+              - BACKUP_CODE
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Config'
+        required: true
+components:
+  schemas:
+    ConfigUpdateRequest:
+      title: ConfigUpdateRequest
+      type: object
+      properties:
+        useByDefault:
+          type: boolean
+    Config:
+      title: Config
+      type: object
+      properties:
+        useByDefault:
+          type: boolean
